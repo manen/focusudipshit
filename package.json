@@ -9,6 +9,7 @@
   "author": "werymanen",
   "license": "MIT",
   "dependencies": {
-    "iohook": "^0.6.5"
+    "iohook": "^0.6.5",
+    "play-sound": "^1.1.3"
   }
 }
