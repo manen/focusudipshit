@@ -2,7 +2,7 @@ const ioHook = require("iohook");
 const player = require("play-sound")((opts = {}));
 
 const limit = 10000;
-const checkInterval = 250;
+const checkInterval = 1000;
 var last = Date.now();
 
 const alert = "alert.wav";
