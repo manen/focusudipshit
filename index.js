@@ -2,13 +2,10 @@ const ioHook = require("iohook");
 const player = require("play-sound")((opts = {}));
 
 const limit = 10000;
+const checkInterval = 250;
 var last = Date.now();
 
 const alert = "alert.wav";
-
-player.play(alert, err => {
-    if (err) console.log(err);
-});
 
 function check() {
     if (Date.now() - last >= limit) {
@@ -23,9 +20,11 @@ function event(e) {
 }
 
 ioHook.on("mousemove", event);
-
+ioHook.on("mouseclick", event);
+ioHook.on("mousewheel", event);
 ioHook.on("keydown", event);
+ioHook.on("keyup", event);
 
-setInterval(check, 500);
+setInterval(check, checkInterval);
 
 ioHook.start();
