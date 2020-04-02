@@ -1,0 +1,11 @@
+{
+  "name": "focusudipshit",
+  "version": "0.0.1",
+  "description": "A program that helps you focus on the work on the computer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "werymanen",
+  "license": "MIT"
+}
