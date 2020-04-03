@@ -29,3 +29,7 @@ node index.js
 ## Now, it should work.
 
 If it doesn't, or you have an idea to improve the program, please leave it in the [Issues tab](https://github.com/werymanen/focusudipshit/issued)
+
+### By the way
+
+All the voices come from [TTSMP3](https://ttsmp3.com/). Although they said it is free on the website, I feel like I have to give them credit.
