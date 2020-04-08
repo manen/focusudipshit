@@ -43,6 +43,7 @@ ioHook.on("mouseclick", event);
 ioHook.on("mousewheel", event);
 ioHook.on("keydown", event);
 ioHook.on("keyup", event);
+ioHook.on("mousedrag", event);
 
 setInterval(check, checkInterval);
 
