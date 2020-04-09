@@ -11,6 +11,9 @@ const alert = "alert.wav";
 const disable = "disable.wav";
 const enable = "enable.wav";
 
+const enableLogging = true;
+const log = enableLogging ? require("./log") : () => {};
+
 var keybindPressed = false;
 function keybind(e) {
     if (e.type == "keydown") {
@@ -60,6 +63,7 @@ function event(e) {
         time: Date.now()
     };
     keybind(e);
+    log(e);
     last = Date.now();
 }
 
