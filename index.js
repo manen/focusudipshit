@@ -11,6 +11,40 @@ const alert = "alert.wav";
 const disable = "disable.wav";
 const enable = "enable.wav";
 
+var keybindPressed = false;
+function keybind(e) {
+    if (e.type == "keydown") {
+        if (keybindPressed) {
+            if (e.keycode == 19) {
+                if (enabled) {
+                    e.keycode = 18;
+                } else {
+                    e.keycode = 32;
+                }
+            }
+
+            if (e.keycode == 32) {
+                player.play(disable, err => {
+                    if (err) console.log(err);
+                });
+                enabled = false;
+            }
+
+            if (e.keycode == 18) {
+                player.play(enable, err => {
+                    if (err) console.log(err);
+                });
+                enabled = true;
+            }
+
+            keybindPressed = false;
+        }
+        if (e.keycode == 16 && e.altKey && e.ctrlKey) {
+            keybindPressed = true;
+        }
+    }
+}
+
 function check() {
     if (!enabled) return;
     if (Date.now() - last >= limit) {
@@ -21,20 +55,11 @@ function check() {
 }
 
 function event(e) {
-    if (e.type == "keydown")
-        if (e.keycode == 16 && e.altKey && e.ctrlKey) {
-            if (enabled) {
-                player.play(disable, err => {
-                    if (err) console.log(err);
-                });
-                enabled = false;
-            } else {
-                player.play(enable, err => {
-                    if (err) console.log(err);
-                });
-                enabled = true;
-            }
-        }
+    e = {
+        ...e,
+        time: Date.now()
+    };
+    keybind(e);
     last = Date.now();
 }
 
