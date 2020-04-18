@@ -1,0 +1,8 @@
+Help: 
+
+Combo: Control + Alt + Q
+
+Enable: Combo + E
+Disable: Combo + D
+
+Cycle: Combo + R

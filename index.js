@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const ioHook = require("iohook");
 const player = require("play-sound")((opts = {}));
 
@@ -7,12 +9,34 @@ var last = Date.now();
 
 var enabled = true;
 
-const alert = "alert.wav";
-const disable = "disable.wav";
-const enable = "enable.wav";
+const alertSound = "alert.wav";
+const disableSound = "disable.wav";
+const enableSound = "enable.wav";
+
+const feedbackSound = "feedback.wav";
 
 const enableLogging = true;
 const log = enableLogging ? require("./log") : () => {};
+
+function enable() {
+    player.play(enableSound, err => {
+        if (err) console.log(err);
+    });
+    enabled = true;
+}
+
+function disable() {
+    player.play(disableSound, err => {
+        if (err) console.log(err);
+    });
+    enabled = false;
+}
+
+function feedback() {
+    player.play(feedbackSound, err => {
+        if (err) console.log(err);
+    });
+}
 
 var keybindPressed = false;
 function keybind(e) {
@@ -20,30 +44,25 @@ function keybind(e) {
         if (keybindPressed) {
             if (e.keycode == 19) {
                 if (enabled) {
-                    e.keycode = 18;
+                    disable();
                 } else {
-                    e.keycode = 32;
+                    enable();
                 }
             }
 
             if (e.keycode == 32) {
-                player.play(disable, err => {
-                    if (err) console.log(err);
-                });
-                enabled = false;
+                disable();
             }
 
             if (e.keycode == 18) {
-                player.play(enable, err => {
-                    if (err) console.log(err);
-                });
-                enabled = true;
+                enable();
             }
 
             keybindPressed = false;
         }
         if (e.keycode == 16 && e.altKey && e.ctrlKey) {
             keybindPressed = true;
+            feedback();
         }
     }
 }
@@ -51,7 +70,7 @@ function keybind(e) {
 function check() {
     if (!enabled) return;
     if (Date.now() - last >= limit) {
-        player.play(alert, err => {
+        player.play(alertSound, err => {
             if (err) console.log(err);
         });
     }
@@ -77,3 +96,5 @@ ioHook.on("mousedrag", event);
 setInterval(check, checkInterval);
 
 ioHook.start();
+
+console.log(fs.readFileSync("./help.txt").toString());
