@@ -9,11 +9,11 @@ var last = Date.now();
 
 var enabled = true;
 
-const alertSound = "alert.wav";
-const disableSound = "disable.wav";
-const enableSound = "enable.wav";
+const alertSound = "./assets/alert.wav";
+const disableSound = "./assets/disable.wav";
+const enableSound = "./assets/enable.wav";
 
-const feedbackSound = "feedback.wav";
+const feedbackSound = "./assets/feedback.wav";
 
 const enableLogging = true;
 const log = enableLogging ? require("./log") : () => {};
